@@ -1,0 +1,122 @@
+{block content}
+<div class="container">
+    <div class="page-header">
+        <h1 n:inner-block="title">Congratulations!</h1>
+        <small>You have successfully created your Nette Framework project.</small>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span2">
+            
+            <ul class="nav nav-pills nav-stacked" id="myTab">
+                <li class="active"><a href="#home">Home</a></li>
+                <li><a href="#templates">Teplates view</a></li>
+            </ul>            
+            
+        </div>
+        <div class="span10">
+            <div class="tab-content">
+                <div class="tab-pane active" id="home">
+                    
+                    <div class="media">
+                        <a class="pull-left" href="{$basePath}/adminer/">
+                            <img width="64" height="64" class="media-object" src="http://files.nette.org/sandbox/database.png" alt="">
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading"><a href="{$basePath}/adminer/">Manage database tables</a></h4>
+                            <!-- Nested media object -->
+                            <div class="media">
+                                <p>Manage your database using pre-installed tool <a href="{$basePath}/adminer/">Adminer</a> with an easy to use GUI.<p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="media">
+                        <a class="pull-left" href="http://doc.nette.org/quickstart">
+                            <img width="64" height="64" class="media-object" src="http://files.nette.org/sandbox/book.png" alt="Read">
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading"><a href="http://doc.nette.org/quickstart">Read Quick-start tutorial</a></h4>
+                            <!-- Nested media object -->
+                            <div class="media">
+                                <p>If you are exploring Nette Framework for the first time, you should read the
+                                <a href="http://doc.nette.org/quickstart">Quick Start</a>, <a href="http://doc.nette.org">documentation</a>,
+                                <a href="http://pla.nette.org">tutorials</a> and <a href="http://forum.nette.org">forum</a>.</p>                            
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="media">
+                        <a class="pull-left" href="http://doc.nette.org/quickstart">
+                            <img width="64" height="64" class="media-object" src="http://files.nette.org/sandbox/database.png" alt="">
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading"><a href="{link createDefaultUser!}">Load Dummy data</a></h4>
+                            <!-- Nested media object -->
+                            <div class="media">
+                                <a href="{link createDefaultUser!}">Dummy data</a>
+                            </div>
+                        </div>
+                    </div>                    
+                    
+                </div>
+                <div class="tab-pane" id="templates">
+                    
+                    <div class="media">
+                        <a class="pull-left" href="http://doc.nette.org/quickstart">
+                            <img width="64" height="64" src="http://files.nette.org/sandbox/sourcecode.png" alt="">
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading"><a href="http://doc.nette.org/quickstart">Explore source codes</a></h4>
+                            <!-- Nested media object -->
+                            <div class="media">
+                                <p>See source code of <a href="#template">this page template</a>, <a href="#layout">layout template</a> and
+                                <a href="#presenter">corresponding presenter</a>. And feel free to modify them!</p>
+                            </div>
+                        </div>
+                    </div>                    
+
+                    <section id="template">
+                        <h2>This page template located at <span>{strstr($presenter->template->getFile(), app)}</span></h2>
+
+                        <pre><code class="jush">{file_get_contents($presenter->template->getFile())}</code></pre>
+                    </section>
+
+                    <section id="layout">
+                        <h2>Layout template located at <span>{strstr($template->getFile(), app)}</span></h2>
+
+                        <pre><code class="jush">{file_get_contents($template->getFile())}</code></pre>
+                    </section>
+
+                    <section id="presenter">
+                        <h2>Current presenter located at <span>{strstr($presenter->reflection->fileName, app)}</span></h2>
+
+                        <pre><code class="jush-php">{file_get_contents($presenter->reflection->fileName)}</code></pre>
+                    </section>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+<div class="push"></div>
+{/block}
+
+{block jscript}
+<script type="text/javascript">
+$('#myTab a').click(function (e) {
+    e.preventDefault();
+    $(this).tab('show');
+})
+
+$('code.jush').each(function(){ $(this).html($(this).html().replace(/\x7B[/$\w].*?\}/g, '<span class="jush-latte">$&</span>')) });
+
+$('a[href^=#]').click(function(){
+        $('html,body').animate({ scrollTop: $($(this).attr('href')).show().offset().top - 5 }, 'fast');
+        return false;
+});
+</script>
+{/block}

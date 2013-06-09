@@ -1,0 +1,101 @@
+{**
+ * My Application layout template.
+ *
+ * @author     Tomas Grasl
+ * @package    Nette sanbox
+ *
+ * @param string   $basePath web base path
+ * @param string   $robots   tell robots how to index the content of a page (optional)
+ * @param array    $flashes  flash messages
+ *}
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <!-- Basic Page Needs
+    ================================================== -->    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Nette skeleton {block title}{/block}</title>
+
+    <meta name="description" content="">
+    <meta name="robots" content="{$robots}" n:ifset="$robots">
+
+    <!-- Mobile Specific Metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- CSS
+    ================================================== -->        
+    <link rel="stylesheet" href="{$basePath}/css/normalize.css">
+    <link rel="stylesheet" href="{$basePath}/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="{$basePath}/css/main.css">
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->        
+
+    <!-- Favicons
+    ================================================== -->
+    <link rel="shortcut icon" href="{$basePath}/images/icons/favicon.ico">
+    <link rel="apple-touch-icon" href="{$basePath}/images/icons/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="{$basePath}/images/icons/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="{$basePath}/images/icons/apple-touch-icon-114x114-precomposed.png">        
+    <link rel="shortcut icon" href="{$basePath}/favicon.ico" type="image/x-icon">
+
+    <script src="{$basePath}/js/vendor/modernizr-2.6.2.min.js"></script>        
+
+    {block head}{/block}
+</head>
+
+<body>
+    <div class="layout">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <a class="brand" href="#">Nette Application Skeleton</a>
+                <ul class="nav">
+                    <li {ifCurrent Homepage:default}class="active"{/ifCurrent}><a href="{link Homepage:default}">Home</a></li>
+                    <li {ifCurrent Sign:in}class="active"{/ifCurrent}><a href="{link Sign:in}">Login</a></li>
+                    <li><a href="{$basePath}/adminer/>Link">Manage database tables</a></li>
+                    <li><a href="http://doc.nette.org/quickstart">Quick-start tutorial</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+
+        {include #content}
+    
+    </div><!-- layout div end -->
+
+    <footer>
+        <div class="container">
+            PHP {=PHP_VERSION} |
+            {ifset $_SERVER['SERVER_SOFTWARE']}Server {$_SERVER['SERVER_SOFTWARE']}{/ifset} |
+            Nette Framework {=Nette\Framework::VERSION}
+        </div>
+    </footer>    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">window.jQuery || document.write('<script src="{$basePath}/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+    <script type="text/javascript" src="{$basePath}/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{$basePath}/js/netteForms.js"></script>
+    <script type="text/javascript" src="{$basePath}/js/plugins.js"></script>
+    <script type="text/javascript" src="{$basePath}/js/main.js"></script>
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <script type="text/javascript">
+        var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+        (function(d,t){ var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src='//www.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s) }(document,'script'));
+    </script>
+    {block jscript}
+    
+    {/block}
+</body>
+</html>
