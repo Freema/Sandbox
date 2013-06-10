@@ -1,5 +1,5 @@
 {
-	"name": "vrtak-cz/nette-doctrine-sandbox",
+	"name": "Freema/Sandbox",
 	"description": "Sandbox for Nette & Doctrine",
 	"config": {
 		"vendor-dir": "./libs"
